@@ -113,9 +113,63 @@
     font-family: monospace;
     border: 1px dashed #bbb;
   }
+
+  #site-content { display: none; }
+
+  #lock-screen {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    background: #1a1013;
+    padding: 24px;
+    text-align: center;
+  }
+  #lock-screen p {
+    color: #f0d9dc;
+    font-size: 15px;
+  }
+  #lock-form {
+    display: flex;
+    gap: 8px;
+  }
+  #lock-password {
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid #b4474a;
+    font-size: 15px;
+    width: 200px;
+  }
+  #lock-submit {
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    background: #b4474a;
+    color: #fff;
+    font-size: 15px;
+    cursor: pointer;
+  }
+  #lock-error {
+    color: #ffb3b3;
+    font-size: 13px;
+    min-height: 1.2em;
+  }
 </style>
 </head>
 <body>
+
+<div id="lock-screen">
+  <p>Please enter the password to view this page</p>
+  <form id="lock-form">
+    <input id="lock-password" type="password" autocomplete="off" placeholder="Password">
+    <button id="lock-submit" type="submit">Enter</button>
+  </form>
+  <div id="lock-error"></div>
+</div>
+
+<div id="site-content">
 <div class="page">
 
   <!-- 主視覺 Hero：≥1000px 螢幕用桌機版(2000x1000)，<1000px 用手機版(960x1000) -->
@@ -215,5 +269,37 @@
 
 </div>
 <div class="footer">© Smilegate. All Rights Reserved.</div>
+</div>
+
+<script>
+(function () {
+  var PASSWORD = "offerme2";
+  var lock = document.getElementById("lock-screen");
+  var content = document.getElementById("site-content");
+  var form = document.getElementById("lock-form");
+  var input = document.getElementById("lock-password");
+  var error = document.getElementById("lock-error");
+
+  function unlock() {
+    lock.style.display = "none";
+    content.style.display = "block";
+  }
+
+  if (sessionStorage.getItem("unlocked") === "1") {
+    unlock();
+  }
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    if (input.value === PASSWORD) {
+      sessionStorage.setItem("unlocked", "1");
+      unlock();
+    } else {
+      error.textContent = "Incorrect password, please try again";
+      input.value = "";
+    }
+  });
+})();
+</script>
 </body>
 </html>
