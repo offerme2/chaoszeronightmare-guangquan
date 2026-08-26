@@ -124,30 +124,39 @@
 
   .tab-nav {
     display: flex;
-    gap: 2%;
+    background: #fff;
+    border-radius: 999px;
+    overflow: hidden;
     margin-top: 2em;
-    flex-wrap: wrap;
+    box-shadow: 0 0.2vw 0.8vw rgba(60, 20, 25, 0.1);
   }
   .tab-btn {
-    flex: 1 1 auto;
-    min-width: 22%;
-    padding: 0.7em 0.5em;
-    border-radius: 999px;
-    border: 1px solid #6b3d42;
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.1em;
+    padding: 0.8em 0.4em;
+    border: none;
+    border-right: 1px solid #eee2df;
+    border-radius: 0;
     background: #fff;
-    color: #6b3d42;
+    color: #4a4a4a;
     font-size: clamp(12px, 1.3vw, 20px);
     cursor: pointer;
     text-align: center;
   }
+  .tab-btn:last-child { border-right: none; }
   .tab-btn .chev {
-    display: inline-block;
-    margin-left: 0.2em;
+    display: block;
+    font-size: 0.85em;
+    line-height: 1;
   }
   .tab-btn.active {
     background: #6b3d42;
     color: #fff;
-    border-color: #6b3d42;
+    border-radius: 999px;
   }
   .content-full { width: 100%; margin-top: 1%; }
 
