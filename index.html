@@ -93,9 +93,6 @@
     margin: 1.6em 0;
   }
   .tab-content {
-    height: clamp(320px, 42vh, 520px);
-    overflow-y: auto;
-    padding-right: 2%;
     margin-top: 1.2em;
   }
   .notice-box .n-para {
@@ -431,6 +428,7 @@
       panels.forEach(function (p) {
         p.hidden = p.getAttribute("data-panel") !== target;
       });
+      btn.closest(".tab-nav").scrollIntoView({ block: "start" });
     });
   });
 })();
